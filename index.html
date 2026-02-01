@@ -86,43 +86,51 @@
   <!-- Confetti Library -->
   <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
 
-  <script>
-    const noBtn = document.getElementById("no");
-    const yesBtn = document.getElementById("yes");
-    const question = document.getElementById("question");
+<script>
+  const noBtn = document.getElementById("no");
+  const yesBtn = document.getElementById("yes");
+  const question = document.getElementById("question");
+  const container = document.querySelector(".buttons");
 
-    function moveNoButton() {
-      const x = Math.random() * (window.innerWidth - 120);
-      const y = Math.random() * (window.innerHeight - 120);
-      noBtn.style.left = x + "px";
-      noBtn.style.top = y + "px";
-    }
+  function moveNoButton() {
+    const containerRect = container.getBoundingClientRect();
+    const btnRect = noBtn.getBoundingClientRect();
 
-    // Desktop hover
-    noBtn.addEventListener("mouseover", moveNoButton);
+    const maxX = containerRect.width - btnRect.width;
+    const maxY = containerRect.height - btnRect.height;
 
-    // Mobile tap
-    noBtn.addEventListener("click", moveNoButton);
+    const x = Math.random() * maxX;
+    const y = Math.random() * maxY;
 
-    yesBtn.addEventListener("click", () => {
-      question.innerText = "YAYYYY 💕🥰🎉";
-      document.querySelector(".buttons").style.display = "none";
+    noBtn.style.left = x + "px";
+    noBtn.style.top = y + "px";
+  }
 
-      confetti({
-        particleCount: 200,
-        spread: 90,
-        origin: { y: 0.6 }
-      });
+  // Desktop hover
+  noBtn.addEventListener("mouseover", moveNoButton);
 
-      setTimeout(() => {
-        confetti({
-          particleCount: 300,
-          spread: 120,
-          origin: { y: 0.4 }
-        });
-      }, 500);
+  // Mobile tap
+  noBtn.addEventListener("click", moveNoButton);
+
+  yesBtn.addEventListener("click", () => {
+    question.innerText = "YAYYYY 💕🥰🎉";
+    document.querySelector(".buttons").style.display = "none";
+
+    confetti({
+      particleCount: 200,
+      spread: 100,
+      origin: { y: 0.6 }
     });
-  </script>
+
+    setTimeout(() => {
+      confetti({
+        particleCount: 300,
+        spread: 140,
+        origin: { y: 0.4 }
+      });
+    }, 500);
+  });
+</script>
 
 </body>
 </html>
